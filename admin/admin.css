@@ -51,6 +51,11 @@
   margin: 0;
 }
 
+#login-form {
+  display: grid;
+  gap: 1rem;
+}
+
 /* ─── Admin header ──────────────────────────────────────────────────────────── */
 
 .admin-header {
