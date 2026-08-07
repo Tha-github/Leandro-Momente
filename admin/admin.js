@@ -13,6 +13,23 @@ const sb = initClient();
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
+function textToHtml(text) {
+  return String(text || "")
+    .trim()
+    .split(/\n{2,}/)
+    .filter((p) => p.trim())
+    .map((p) => `<p>${p.trim().replace(/\n/g, "<br>")}</p>`)
+    .join("");
+}
+
+function htmlToText(html) {
+  return String(html || "")
+    .replace(/<\/p>\s*<p>/gi, "\n\n")
+    .replace(/<br\s*\/?>/gi, "\n")
+    .replace(/<[^>]+>/g, "")
+    .trim();
+}
+
 function slugify(text) {
   return String(text)
     .normalize("NFD")
@@ -192,22 +209,13 @@ function openForm(article) {
 
   form.titulo.value = article?.titulo || "";
   form.slug.value = article?.slug || "";
-  form.resumo.value = article?.resumo || "";
-  form.conteudo.value = article?.conteudo || "";
+  form.conteudo.value = htmlToText(article?.conteudo || "");
   form.categoria.value = article?.categoria || "Criança e Adolescente";
   form.autor.value = article?.autor || "Leandro Momente";
   form.data_publicacao.value = article?.data_publicacao || "";
   form.tempo_leitura.value = article?.tempo_leitura || "";
   form.destaque.checked = Boolean(article?.destaque);
   form.publicado.checked = Boolean(article?.publicado);
-  form.imagem_capa.value = "";
-
-  const preview = document.getElementById("current-image");
-  if (article?.imagem_capa) {
-    preview.innerHTML = `<img src="${escapeHtml(article.imagem_capa)}" alt="Imagem atual" />`;
-  } else {
-    preview.innerHTML = "";
-  }
 
   document.getElementById("modal-title").textContent = article ? "Editar notícia" : "Nova notícia";
   document.getElementById("form-error").textContent = "";
@@ -232,32 +240,10 @@ async function handleFormSubmit(e) {
   saveBtn.disabled = true;
   saveBtn.textContent = "Salvando…";
 
-  let imagemCapa = null;
-  const imageFile = form.imagem_capa.files[0];
-
-  if (imageFile) {
-    const ext = imageFile.name.split(".").pop().toLowerCase();
-    const fileName = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
-    const { error: uploadError } = await sb.storage
-      .from("imagens")
-      .upload(fileName, imageFile, { cacheControl: "3600", upsert: false });
-
-    if (uploadError) {
-      errorEl.textContent = "Erro ao enviar imagem: " + uploadError.message;
-      saveBtn.disabled = false;
-      saveBtn.textContent = "Salvar notícia";
-      return;
-    }
-
-    const { data: { publicUrl } } = sb.storage.from("imagens").getPublicUrl(fileName);
-    imagemCapa = publicUrl;
-  }
-
   const payload = {
     titulo: form.titulo.value.trim(),
     slug: form.slug.value.trim(),
-    resumo: form.resumo.value.trim(),
-    conteudo: form.conteudo.value.trim(),
+    conteudo: textToHtml(form.conteudo.value),
     categoria: form.categoria.value,
     autor: form.autor.value.trim(),
     data_publicacao: form.data_publicacao.value || null,
@@ -265,8 +251,6 @@ async function handleFormSubmit(e) {
     destaque: form.destaque.checked,
     publicado: form.publicado.checked
   };
-
-  if (imagemCapa) payload.imagem_capa = imagemCapa;
 
   let error;
   if (editingId) {

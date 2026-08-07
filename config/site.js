@@ -7,7 +7,7 @@ const siteConfig = {
   },
   siteName: "Leandro Momente",
   whatsappNumber: "5511999999999",
-  phoneDisplay: "(11) 99999-9999",
+  phoneDisplay: "(11) 00000-0000",
   whatsappMessage: "Olá! Gostaria de conversar sobre consultoria e capacitação.",
   email: "contato@leandromomente.com.br",
   instagram: "https://instagram.com",
