@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login — Painel Leandro Momente</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="admin.css" />
+</head>
+
+<body class="admin-page">
+  <main class="admin-login-wrap">
+    <div class="login-card">
+      <div class="login-brand">
+        <img src="../assets/images/leandromomentelogo.png" alt="Leandro Momente" />
+      </div>
+      <h1>Painel Administrativo</h1>
+      <p class="login-subtitle">Acesso restrito — notícias e conteúdos</p>
+
+      <form id="login-form" novalidate>
+        <label>
+          E-mail
+          <input type="email" name="email" required autocomplete="email" />
+        </label>
+        <label>
+          Senha
+          <input type="password" name="password" required autocomplete="current-password" />
+        </label>
+        <button type="submit" class="button button-primary full-width" id="login-btn">
+          Entrar
+        </button>
+        <p class="error-message" id="login-error"></p>
+      </form>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="../config/site.js"></script>
+  <script src="admin.js"></script>
+</body>
+
+</html>

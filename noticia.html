@@ -9,27 +9,45 @@
 </head>
 
 <body>
+  <a class="skip-link" href="#conteudo-principal">Pular para o conteúdo</a>
+
   <header class="site-header">
     <div class="container nav-bar">
       <a class="brand" href="index.html" aria-label="Leandro Momente">
         <img src="assets/images/leandromomentelogo.png" alt="Logo Leandro Momente" />
       </a>
-      <nav aria-label="Navegação principal">
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        Menu
+      </button>
+      <nav class="site-nav" id="site-nav" aria-label="Navegação principal">
         <ul class="nav-list">
           <li><a href="index.html">Início</a></li>
+          <li><a href="index.html#sobre">Sobre</a></li>
+          <li><a href="index.html#atuacao">Áreas de atuação</a></li>
           <li><a href="noticias.html">Notícias</a></li>
+          <li><a href="index.html#contato">Contato</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <main class="article-page">
+  <main id="conteudo-principal" class="article-page">
     <div class="container article-layout">
       <article class="article-content" id="article-content"></article>
       <aside class="article-sidebar" id="article-sidebar"></aside>
     </div>
   </main>
 
+  <footer class="site-footer">
+    <div class="container footer-bottom">
+      <p>© <span id="year"></span> Leandro Momente. Todos os direitos reservados.</p>
+      <div class="footer-links">
+        <a href="noticias.html">← Voltar às notícias</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script src="config/site.js"></script>
   <script src="data/noticias.js"></script>
   <script src="script.js"></script>

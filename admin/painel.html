@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel — Leandro Momente</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="admin.css" />
+</head>
+
+<body class="admin-page">
+
+  <!-- Header do painel -->
+  <header class="admin-header">
+    <div class="container admin-header-inner">
+      <span class="admin-brand">Leandro Momente · Admin</span>
+      <a href="../index.html" class="admin-site-link" target="_blank" rel="noreferrer">Ver site</a>
+      <button id="logout-btn" type="button" class="button admin-logout-btn">Sair</button>
+    </div>
+  </header>
+
+  <main class="admin-body">
+    <div class="container">
+
+      <!-- Estatísticas -->
+      <div class="stats-bar">
+        <div class="stat-card">
+          <span>Total</span>
+          <strong id="stat-total">—</strong>
+        </div>
+        <div class="stat-card">
+          <span>Publicados</span>
+          <strong id="stat-publicados">—</strong>
+        </div>
+        <div class="stat-card">
+          <span>Rascunhos</span>
+          <strong id="stat-rascunhos">—</strong>
+        </div>
+      </div>
+
+      <!-- Barra de ações -->
+      <div class="admin-toolbar">
+        <h2 class="admin-section-title">Notícias</h2>
+        <button id="new-article-btn" type="button" class="button button-primary">
+          + Nova notícia
+        </button>
+      </div>
+
+      <!-- Tabela de artigos -->
+      <div class="article-table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Título</th>
+              <th>Categoria</th>
+              <th>Data</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="article-list">
+            <tr>
+              <td colspan="5" class="table-loading">Carregando…</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Modal: Criar / Editar notícia -->
+  <div id="form-modal" class="modal-backdrop" hidden>
+    <div class="modal-box">
+      <div class="modal-header">
+        <h2 id="modal-title">Nova notícia</h2>
+        <button class="modal-close" id="close-modal" type="button" aria-label="Fechar formulário">×</button>
+      </div>
+
+      <form id="article-form" novalidate>
+        <div class="form-row">
+
+          <label class="form-full">
+            Título *
+            <input type="text" name="titulo" required />
+          </label>
+
+          <label>
+            Slug * <small>(URL da notícia)</small>
+            <input type="text" name="slug" required pattern="[a-z0-9\-]+" />
+          </label>
+
+          <label>
+            Categoria
+            <select name="categoria">
+              <option>Criança e Adolescente</option>
+              <option>Mulheres</option>
+              <option>Pessoa Idosa</option>
+              <option>PCD</option>
+              <option>Rede e Políticas Públicas</option>
+              <option>Legislação</option>
+            </select>
+          </label>
+
+          <label>
+            Autor
+            <input type="text" name="autor" value="Leandro Momente" />
+          </label>
+
+          <label>
+            Data de publicação
+            <input type="date" name="data_publicacao" />
+          </label>
+
+          <label>
+            Tempo de leitura
+            <input type="text" name="tempo_leitura" placeholder="ex: 5 min de leitura" />
+          </label>
+
+          <label class="form-full">
+            Resumo * <small>(aparece na listagem)</small>
+            <textarea name="resumo" rows="3" required></textarea>
+          </label>
+
+          <label class="form-full">
+            Conteúdo * <small>(HTML — use &lt;h2&gt;, &lt;p&gt;, &lt;ul&gt;, &lt;blockquote&gt;)</small>
+            <textarea class="conteudo-field" name="conteudo" rows="14" required></textarea>
+          </label>
+
+          <label class="form-full">
+            Imagem de capa
+            <input type="file" name="imagem_capa" accept="image/jpeg,image/png,image/webp" />
+            <div id="current-image" class="image-preview"></div>
+          </label>
+
+          <label class="checkbox-row">
+            <input type="checkbox" name="destaque" />
+            <span>Marcar como destaque</span>
+          </label>
+
+          <label class="checkbox-row">
+            <input type="checkbox" name="publicado" />
+            <span>Publicar (visível no site)</span>
+          </label>
+
+        </div>
+
+        <p class="error-message" id="form-error"></p>
+
+        <div class="form-actions">
+          <button type="button" id="cancel-btn" class="button admin-cancel-btn">Cancelar</button>
+          <button type="submit" class="button button-primary" id="save-btn">Salvar notícia</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="../config/site.js"></script>
+  <script src="admin.js"></script>
+</body>
+
+</html>

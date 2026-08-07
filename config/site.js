@@ -1,6 +1,13 @@
 const siteConfig = {
+  // ── Supabase ──────────────────────────────────────────────────────────────
+  // Preencha com os valores do painel Supabase: Settings > API
+  supabase: {
+    url: "https://SEU_PROJETO.supabase.co",
+    anonKey: "SUA_CHAVE_ANONIMA_AQUI"
+  },
   siteName: "Leandro Momente",
   whatsappNumber: "5511999999999",
+  phoneDisplay: "(11) 99999-9999",
   whatsappMessage: "Olá! Gostaria de conversar sobre consultoria e capacitação.",
   email: "contato@leandromomente.com.br",
   instagram: "https://instagram.com",

@@ -8,6 +8,8 @@
     content="Leandro Momente oferece consultoria e capacitação em direitos humanos para a rede de atendimento e proteção social." />
   <title>Leandro Momente | Consultoria e Capacitação em Direitos Humanos</title>
   <link rel="stylesheet" href="styles.css" />
+  <link rel="preload" as="image" href="assets/images/leandromomentelogo.png" />
+  <link rel="preload" as="image" href="assets/images/banner.jpg" />
 </head>
 
 <body data-page="home">
@@ -59,7 +61,7 @@
         </div>
         <div class="hero-visual reveal">
           <div class="hero-card">
-            <img src="assets/images/banner.jpg" alt="Profissionais em ambiente institucional e de formação" />
+            <img src="assets/images/banner.jpg" alt="Profissionais em ambiente institucional e de formação" fetchpriority="high" decoding="async" />
           </div>
         </div>
       </div>
@@ -78,7 +80,7 @@
     <section class="section section-alt" id="sobre">
       <div class="container about-grid">
         <div class="reveal">
-          <img class="about-photo" src="assets/hero-placeholder.svg" alt="Leandro Momente em atuação profissional" />
+          <img class="about-photo" src="assets/images/sobre.jpg" alt="Leandro Momente em atuação profissional" loading="lazy" />
         </div>
         <div class="reveal about-copy">
           <p class="eyebrow">Sobre</p>
@@ -171,7 +173,7 @@
         </div>
         <div class="news-preview-grid" id="news-preview"></div>
         <div class="news-actions reveal">
-          <a class="button button-primary" href="noticias.html">Ver mais</a>
+          <a class="button button-primary" href="noticias.html">Ver mais notícias</a>
         </div>
       </div>
     </section>
@@ -315,7 +317,7 @@
         <h3>Contato</h3>
         <ul>
           <li><a href="#" data-email-link>contato@leandromomente.com.br</a></li>
-          <li><a href="#" data-whatsapp-link>WhatsApp</a></li>
+          <li><a href="#" data-phone-link>(11) 99999-9999</a></li>
           <li><span data-address>Rua das Oficinas, 123</span></li>
         </ul>
       </div>
@@ -340,6 +342,7 @@
     </svg>
   </a>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script src="config/site.js"></script>
   <script src="data/noticias.js"></script>
   <script src="script.js"></script>

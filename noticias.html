@@ -4,44 +4,61 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Notícias e artigos sobre legislação, direitos humanos e orientações técnicas — Leandro Momente." />
   <title>Notícias e artigos — Leandro Momente</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
+  <a class="skip-link" href="#conteudo-principal">Pular para o conteúdo</a>
+
   <header class="site-header">
     <div class="container nav-bar">
       <a class="brand" href="index.html" aria-label="Leandro Momente">
         <img src="assets/images/leandromomentelogo.png" alt="Logo Leandro Momente" />
       </a>
-      <nav aria-label="Navegação principal">
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        Menu
+      </button>
+      <nav class="site-nav" id="site-nav" aria-label="Navegação principal">
         <ul class="nav-list">
+          <li><a href="index.html">Início</a></li>
           <li><a href="index.html#sobre">Sobre</a></li>
           <li><a href="index.html#atuacao">Áreas de atuação</a></li>
-          <li><a href="noticias.html">Notícias</a></li>
+          <li><a href="noticias.html" class="active">Notícias</a></li>
           <li><a href="index.html#contato">Contato</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <main>
+  <main id="conteudo-principal">
     <section class="page-hero">
       <div class="container">
         <p class="eyebrow">Notícias e artigos</p>
-        <h1>Atualizações de legislação, resoluções e orientações técnicas.</h1>
+        <h1>Atualizações de legislação, resoluções e orientações técnicas</h1>
         <p>Conteúdo produzido para apoiar a atuação profissional e institucional da rede de atendimento.</p>
       </div>
     </section>
 
     <section class="section">
       <div class="container">
-        <div class="filters" id="filters"></div>
+        <div id="filters"></div>
         <div id="news-list" class="news-list"></div>
       </div>
     </section>
   </main>
 
+  <footer class="site-footer">
+    <div class="container footer-bottom">
+      <p>© <span id="year"></span> Leandro Momente. Todos os direitos reservados.</p>
+      <div class="footer-links">
+        <a href="#">Política de Privacidade</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script src="config/site.js"></script>
   <script src="data/noticias.js"></script>
   <script src="script.js"></script>
