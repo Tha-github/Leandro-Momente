@@ -369,12 +369,10 @@ async function renderNewsListPage() {
     list.innerHTML = items.length
       ? items.map((item) => `
           <article class="news-item">
-            <a href="noticia.html?slug=${encodeURIComponent(item.slug)}">
-              <p class="meta">${escapeHtml(item.categoria)} · ${formatDate(item.dataPublicacao)}</p>
-              <h3>${escapeHtml(item.titulo)}</h3>
-              <p>${escapeHtml(item.resumo)}</p>
-              <p class="meta">${escapeHtml(item.tempoLeitura)}</p>
-            </a>
+            <p class="meta">${escapeHtml(item.categoria)} · ${formatDate(item.dataPublicacao)}</p>
+            <h3>${escapeHtml(item.titulo)}</h3>
+            <p class="meta">${escapeHtml(item.tempoLeitura)}</p>
+            <a class="button button-primary news-item-btn" href="noticia.html?slug=${encodeURIComponent(item.slug)}">Ler notícia completa</a>
           </article>
         `).join("")
       : "<p>Nenhum conteúdo encontrado para esta busca.</p>";
@@ -425,8 +423,7 @@ async function renderNewsListPage() {
 
 async function renderArticlePage() {
   const articleContent = document.getElementById("article-content");
-  const sidebar = document.getElementById("article-sidebar");
-  if (!articleContent || !sidebar) return;
+  if (!articleContent) return;
 
   const slug = new URLSearchParams(window.location.search).get("slug");
   if (!slug) {
@@ -444,30 +441,12 @@ async function renderArticlePage() {
 
   document.title = `${article.titulo} — Leandro Momente`;
 
-  const headings = Array.from(String(article.conteudo || "").matchAll(/<h2[^>]*>(.*?)<\/h2>/g)).map((m) => m[1]);
-
-  const all = await fetchNoticias();
-  const related = all.filter((n) => n.categoria === article.categoria && n.slug !== article.slug).slice(0, 3);
-
   articleContent.innerHTML = `
     ${article.imagemCapa ? `<img src="${escapeHtml(article.imagemCapa)}" alt="${escapeHtml(article.titulo)}" loading="lazy" class="article-cover-img" />` : ""}
     <p class="meta">${escapeHtml(article.categoria)}</p>
     <h1>${escapeHtml(article.titulo)}</h1>
     <p class="meta">Publicado em ${formatDate(article.dataPublicacao)} · ${escapeHtml(article.autor)} · ${escapeHtml(article.tempoLeitura)}</p>
-    <div class="article-card">
-      ${article.conteudo}
-    </div>
-  `;
-
-  sidebar.innerHTML = `
-    <h3>Índice</h3>
-    <ul>
-      ${headings.length ? headings.map((h) => `<li><a href="#">${h}</a></li>`).join("") : "<li>Sem subtítulos.</li>"}
-    </ul>
-    <h3>Conteúdos relacionados</h3>
-    <ul>
-      ${related.map((n) => `<li><a href="noticia.html?slug=${encodeURIComponent(n.slug)}">${escapeHtml(n.titulo)}</a></li>`).join("")}
-    </ul>
+    ${article.conteudo}
   `;
 }
 

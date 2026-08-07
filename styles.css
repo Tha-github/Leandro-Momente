@@ -898,23 +898,31 @@ select:focus {
 .news-list {
   display: grid;
   gap: 1rem;
+  margin-top: 2rem;
 }
 
 .news-item {
-  padding: 1rem 1.1rem;
+  padding: 1.25rem 1.25rem 1rem;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 1rem;
   box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
 }
 
 .news-item:hover {
   border-color: var(--accent);
 }
 
-.news-item a {
-  color: var(--text);
-  text-decoration: none;
+.news-item h3 {
+  margin: 0;
+}
+
+.news-item-btn {
+  align-self: flex-start;
+  margin-top: 0.75rem;
 }
 
 .article-page {
@@ -928,6 +936,14 @@ select:focus {
 .article-content,
 .article-sidebar {
   padding: 1.4rem;
+}
+
+.article-card {
+  background: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
 }
 
 .article-content blockquote {
@@ -1114,16 +1130,11 @@ select:focus {
   .news-actions {
     opacity: 1 !important;
     transform: none !important;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-strong) 100%);
-    border-radius: 1rem;
-    padding: 1.5rem 1.25rem;
     margin-top: 1rem;
   }
 
   .news-actions .button-primary {
     width: 100%;
-    background: var(--accent);
-    color: var(--text);
     font-size: 1rem;
   }
 
@@ -1165,6 +1176,34 @@ select:focus {
   .footer-bottom {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  /* ── Centralização de títulos, descrições e eyebrows ── */
+  .section-heading,
+  .section-blue .section-heading {
+    align-items: center;
+    text-align: center;
+  }
+
+  .about-copy,
+  .consultoria-grid > div:first-child,
+  .capacitacao-grid > div:first-child {
+    text-align: center;
+  }
+
+  .topics-card {
+    text-align: center;
+  }
+
+  /* ── Banner (hero e page-hero) ── */
+  .hero-grid > div:first-child,
+  .page-hero {
+    text-align: center;
+  }
+
+  .hero-actions,
+  .credibility-strip {
+    justify-content: center;
   }
 }
 
