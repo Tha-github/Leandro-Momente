@@ -2,8 +2,8 @@ const siteConfig = {
   // ── Supabase ──────────────────────────────────────────────────────────────
   // Preencha com os valores do painel Supabase: Settings > API
   supabase: {
-    url: "https://SEU_PROJETO.supabase.co",
-    anonKey: "SUA_CHAVE_ANONIMA_AQUI"
+    url: "https://zksfchsuwudjcngldznp.supabase.co",
+    anonKey: "sb_publishable_nKymV5X8_ygNovzUQDOQnQ_gI8QqnNw"
   },
   siteName: "Leandro Momente",
   whatsappNumber: "5511999999999",
